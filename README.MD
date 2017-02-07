@@ -6,7 +6,7 @@ This is a simple angular application which uses the GitHub api to show general r
 Angular 1.6.1 is used.
 # GET Example
 `$http.get('https://api.github.com/users/angular')`
-![](https://lh5.googleusercontent.com/eJiuEt0w9A-Kx4160IZz1WmsSCB1vPUwEj-4GfUl2XotU1Bg32D63LEdmF5BPUP6pDPQXUdaux7SvOg=w1378-h834)
+![](http://i.imgur.com/p7I0tXx.png)
 
 ## Credits
 [Scott Allen](https://github.com/OdeToCode) for his PluralSight course.    
