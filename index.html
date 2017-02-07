@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="GitView">
+
+  <head>
+    <script data-require="angular.js@1.6.1" data-semver="1.6.1" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"></script>
+    <script src="index.js"></script>
+  </head>
+
+  <body ng-controller="MainController">
+    <h1>{{ message }}</h1>
+    <div> {{ error }} </div>
+    <form name="searchUser" ng-submit="search(username)">
+      <input type="search" required="" placeholder="Username to find" ng-model="username" />
+      <input type="submit" value="Search" />
+    </form>
+    <!-- <div ng-include="'userdetails.html'" ng-show="user"></div> -->
+    <!-- remove below and uncomment former code when properly hosted -->
+    <div ng-show="user">
+      <h2>{{user.name}}</h2>
+      <img ng-src="{{user.avatar_url}}" title="{{user.name}}" width=100px;> Order:
+      <select ng-model="repoSortOrder">
+        <option value="+name">Name</option>
+        <option value="-stargazers_count">Stars</option>
+        <option value="+language">Language</option>
+      </select>
+    </div>
+    <table ng-show="user">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Stars</th>
+          <th>Language</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="repo in repos | orderBy:repoSortOrder">
+          <td>{{repo.name}}</td>
+          <td>{{repo.stargazers_count | number}}</td>
+          <td>{{repo.language}}</td>
+
+        </tr>
+      </tbody>
+    </table>
+  </body>
+
+</html>

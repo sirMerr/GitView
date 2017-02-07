@@ -1,0 +1,27 @@
+{
+  "name": "gitview",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/sirMerr/GitView",
+  "author": "sirMerr <Tiffany Le-Nguyen>",
+  "license": "MIT",
+  "scripts": {
+    "test": "xo"
+  },
+  "xo": {
+    "esnext": true,
+    "rules": {
+      "object-curly-spacing": [
+        "error",
+        "always"
+      ],
+      "curly": [
+        "error",
+        "multi-line"
+      ]
+    }
+  },
+  "devDependencies": {
+    "xo": "^0.17.1"
+  }
+}
