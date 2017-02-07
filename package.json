@@ -23,5 +23,8 @@
   },
   "devDependencies": {
     "xo": "^0.17.1"
+  },
+  "dependencies": {
+    "angular": "1.6.1"
   }
 }

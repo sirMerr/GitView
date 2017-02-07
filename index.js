@@ -1,10 +1,10 @@
-/* global angular:true */
 /**
  * IFFE which has MainController
  * @author https://github.com/sirMerr
  */
 (function () {
 	// declare module
+	const angular = require('angular');
 	const app = angular.module('GitView', []);
 	const MainController = function ($scope, $http) {
 		$scope.message = 'GitView';
