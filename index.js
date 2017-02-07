@@ -8,7 +8,6 @@
 	const app = angular.module('GitView', []);
 	const MainController = function ($scope, $http) {
 		$scope.message = 'GitView';
-		$scope.username = 'angular';
 
 		const onRepos = function (res) {
 			$scope.repos = res.data;
