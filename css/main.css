@@ -2266,8 +2266,9 @@
 	}
 
 	table {
-		margin: 0 0 2em 0;
-		width: 100%;
+		margin-left: 10%;
+		margin-right: 10%;
+		width: 80%;
 	}
 
 		table tbody tr {
@@ -2630,7 +2631,6 @@
 
 	#banner {
 		padding: 14em 0 12em 0;
-		background-image: url(../../images/banner.jpg);
 		background-size: cover;
 		background-position: center top;
 		background-repeat: no-repeat;
@@ -2919,3 +2919,5 @@
 				}
 
 		}
+
+tbody
