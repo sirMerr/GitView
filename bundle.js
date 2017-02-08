@@ -1,39 +1,83 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-/**
- * IFFE which has MainController
- * @author https://github.com/sirMerr
- */
-(function () {
-	// declare module
-	const angular = require('angular');
-	const app = angular.module('GitView', []);
-	const MainController = function ($scope, $http) {
-		$scope.message = 'GitView';
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
 
-		const onRepos = function (res) {
-			$scope.repos = res.data;
-		};
-		const onError = function (reason) {
-			$scope.error = 'Could not fetch the data';
-		};
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
 
-		const onUserComplete = function (res) {
-			$scope.user = res.data;
-			$http.get($scope.user.repos_url)
-        .then(onRepos, onError);
-		};
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
 
-		$scope.search = function (username) {
-			$http.get('https://api.github.com/users/' + username)
-        .then(onUserComplete, onError);
-			$scope.repoSortOrder = '-stargazers_count';
-		};
-	};
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
 
-	app.controller('MainController', ['$scope', '$http', MainController]);
-})();
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 
-},{"angular":3}],2:[function(require,module,exports){
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+
+
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+
+/******/ 	// identity function for calling harmony imports with the correct context
+/******/ 	__webpack_require__.i = function(value) { return value; };
+
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(1);
+module.exports = angular;
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports) {
+
 /**
  * @license AngularJS v1.6.1
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -33016,8 +33060,74 @@ $provide.value("$locale", {
 })(window);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],3:[function(require,module,exports){
-require('./angular');
-module.exports = angular;
 
-},{"./angular":2}]},{},[1]);
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * IFFE which has MainController
+ * @author https://github.com/sirMerr
+ */
+(function () {
+	// declare module
+	var angular = __webpack_require__(0);
+	var app = angular.module('GitView', []);
+
+	var MainController = function MainController($scope, $http, $interval, $log) {
+		var countdownInterval = null;
+
+		var decrementCountdown = function decrementCountdown() {
+			$log.info('Countdown to automatic search: ' + $scope.countdown);
+			$scope.countdown--;
+			if ($scope.countdown < 1) {
+				$scope.search('sirMerr');
+			}
+		};
+
+		var startCountdown = function startCountdown() {
+			countdownInterval = $interval(decrementCountdown, 1000, $scope.countdown);
+		};
+		// gets repo data
+		var onRepos = function onRepos(res) {
+			$scope.repos = res.data;
+		};
+
+		// displays error when something goes wrong
+		var onError = function onError(reason) {
+			$scope.error = 'Could not fetch the data';
+		};
+
+		// gets user data
+		var onUserComplete = function onUserComplete(res) {
+			$scope.user = res.data;
+			$http.get($scope.user.repos_url).then(onRepos, onError);
+		};
+
+		/**
+   * GET request for user, runs @function {onUserComplete}
+   * and sets {$scope.repoSortOrder} as descending stars count.
+   * @param  {String} username -- username given
+   */
+		$scope.search = function (username) {
+			$log.info('Searching for ' + username);
+			$http.get('https://api.github.com/users/' + username).then(onUserComplete, onError);
+			if (countdownInterval) $interval.cancel(countdownInterval);
+		};
+
+		$scope.message = 'GitView';
+		$scope.countdown = 5;
+		$scope.repoSortOrder = '-stargazers_count';
+		startCountdown();
+	};
+
+	// declare controller with MainController and an array containing all
+	// necessary variables
+	app.controller('MainController', MainController);
+})();
+
+/***/ })
+/******/ ]);
